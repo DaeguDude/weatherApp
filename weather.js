@@ -1,4 +1,4 @@
-const apiKey = "2099fd7bf963f2aab2763983636f5bd5";
+const apiKey = "";
 const cityName = "New York";
 const url = `api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
