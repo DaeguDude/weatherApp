@@ -1,27 +1,30 @@
-const apiKey = "2099fd7bf963f2aab2763983636f5bd5";
-const cityName = "New York";
-const url = `api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+const apiKey = "962edb7f9ab1add3416718398c95a830";
 
-// Promise
-// fetch("https://jsonplaceholder.typicode.com/todos/1")
-//   .then((response) => {
-//     if (!response.ok) {
-//       throw new Error("Network response was not ok");
-//     }
-//     return response.json(); // returns promise
-//   })
-//   .then((data) => {
-//     console.log("Success:", data);
-//   })
-//   .catch((err) => {
-//     console.error("Error:", error);
-//   });
-
-// How will I do it in async / await
-
-async function getData() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-  console.log(response);
+function getWeatherResponse(cityName) {
+  fetch(
+    `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`
+  )
+    .then((response) => {
+      console.log(response);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      getWeatherInfo(data);
+    })
+    .catch((err) => console.log(err));
 }
 
-getData();
+function getWeatherInfo(weatherData) {
+  const sunrise = weatherData.sys.sunrise;
+  const sunset = weatherData.sys.sunset;
+  const temperature = weatherData.main.temp;
+  const feelsLike = weatherData.main.feels_like;
+  const humidity = weatherData.main.humidity;
+
+  console.log({ sunrise, sunset, temperature, feelsLike, humidity });
+}
+
+getWeatherResponse("Daegu");
