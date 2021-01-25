@@ -1,4 +1,4 @@
-const apiKey = "962edb7f9ab1add3416718398c95a830";
+const url = `api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
 function getWeatherResponse(cityName) {
   fetch(
