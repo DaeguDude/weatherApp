@@ -1,8 +1,6 @@
-const url = `api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
-
 function getWeatherResponse(cityName) {
   fetch(
-    `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`
+    `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=962edb7f9ab1add3416718398c95a830`
   )
     .then((response) => {
       console.log(response);
