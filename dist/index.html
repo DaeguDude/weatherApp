@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <section class="weather">
+        <header class="weather__header">
+          <form>
+            <input type="text" name="city" />
+            <input type="submit" name="submit" value="Search" />
+            <p class="error"></p>
+          </form>
+          <div class="weather__loader"></div>
+        </header>
+        <main class="weather__main">
+          <div class="weather__contentContainer">
+            <div>
+              <img src="./img/snow.png" class="weather__img" />
+              <div class="weather__temperatureContainer">
+                <span class="weather__temperature">42</span>
+                °C
+              </div>
+            </div>
+            <div class="weather__info">
+              <div class="weather__info__row">
+                FeelsLike: <span class="weather__feelsLike">38</span>°C
+              </div>
+              <div class="weather__info__row">
+                Humiditiy: <span class="weather__humidity">70</span>%
+              </div>
+              <div class="weather__info__row">
+                Sunrise: <span class="weather__sunrise">05:38</span>am
+              </div>
+              <div class="weather__info__row">
+                Sunset: <span class="weather__sunset">20:00</span>pm
+              </div>
+            </div>
+          </div>
+        </main>
+        <script src="main.js"></script>
+      </section>
+    </div>
+  </body>
+</html>
