@@ -4,8 +4,8 @@ function startLoading() {
   loadingElem.classList.add("weather__loader--start");
 }
 
-function endLoading() {
+function stopLoading() {
   loadingElem.classList.remove("weather__loader--start");
 }
 
-export { startLoading, endLoading };
+export { startLoading, stopLoading };

@@ -1,11 +1,11 @@
 import "./style.css";
-import activateSubmitBtn from "./form";
 import {
-  getWeatherResponse,
-  processWeatherResponse,
+  checkStatus,
+  getWeatherJson,
+  getPrimaryWeatherInfo,
   showWeatherInfo,
 } from "./weather";
-import { startLoading, endLoading } from "./loading";
+import { startLoading, stopLoading } from "./loading";
 import { showError, removeError } from "./helper";
 
 import RainImg from "./img/rain.png";
@@ -16,22 +16,33 @@ const form = document.querySelector("form");
 const cityInput = document.querySelector("input[name='city']");
 const submitBtn = document.querySelector("input[type='submit']");
 
-submitBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  startLoading();
-  removeError();
-  getWeatherResponse(cityInput.value)
-    .then((data) => {
-      console.log(data);
-      return processWeatherResponse(data);
-    })
-    .then((data) => {
-      showWeatherInfo(data);
-    })
-    .catch((err) => {
-      showError(err);
-    })
-    .finally(() => endLoading());
-});
+function getWeatherUnit(unit) {
+  if (unit === "metric") {
+    return "metric";
+  } else if (unit === "fahrenheit") {
+    return "imperial";
+  }
+}
 
-// activateSubmitBtn();
+function startApp() {
+  submitBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    startLoading();
+    removeError();
+    fetch(
+      `http://api.openweathermap.org/data/2.5/weather?q=${
+        cityInput.value
+      }&units=${getWeatherUnit(
+        "fahrenheit"
+      )}&appid=962edb7f9ab1add3416718398c95a830`
+    )
+      .then(checkStatus)
+      .then(getWeatherJson)
+      .then(getPrimaryWeatherInfo)
+      .then(showWeatherInfo)
+      .catch(showError)
+      .finally(stopLoading);
+  });
+}
+
+startApp();

@@ -27,6 +27,7 @@
 .error {
   color: red;
 }
+
 .weather__loader {
   display: none;
   border: 16px solid #f3f3f3; /* Light grey */

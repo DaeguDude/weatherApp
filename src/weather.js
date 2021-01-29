@@ -7,19 +7,19 @@ const sunrise = document.querySelector(".weather__sunrise");
 const sunset = document.querySelector(".weather__sunset");
 const myImage = document.querySelector(".weather__img");
 
-function getWeatherResponse(cityName) {
-  return fetch(
-    `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=962edb7f9ab1add3416718398c95a830`,
-    { mode: "cors" }
-  ).then((response) => {
-    if (!response.ok) {
-      throw new Error("We could not find the city");
-    }
-    return response.json();
-  });
+function checkStatus(response) {
+  if (response.ok) {
+    return Promise.resolve(response);
+  } else {
+    return Promise.reject(new Error("City Not Found"));
+  }
 }
 
-function processWeatherResponse(weatherData) {
+function getWeatherJson(response) {
+  return response.json();
+}
+
+function getPrimaryWeatherInfo(weatherData) {
   const sunrise = weatherData.sys.sunrise;
   const sunset = weatherData.sys.sunset;
   const temperature = weatherData.main.temp;
@@ -41,4 +41,4 @@ function showWeatherInfo(weatherInfo) {
   myImage.src = weatherIconURL;
 }
 
-export { getWeatherResponse, processWeatherResponse, showWeatherInfo };
+export { checkStatus, getWeatherJson, getPrimaryWeatherInfo, showWeatherInfo };
